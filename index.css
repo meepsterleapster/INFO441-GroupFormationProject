@@ -156,19 +156,21 @@ img {
     font-weight: 500;
 }
 
-.card button{
-    background-color: #4b2e83;
-    margin: 10px 0 10px 10px;
-    padding: 3px 10px;
-    font-size: 18px;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
+.card .button {
+    display: inline-block; /* Ensures the <a> behaves like a button */
+    background-color: #4b2e83; /* Purple background */
+    margin: 10px 0 10px 10px; /* Adds space around the button */
+    padding: 3px 10px; /* Adjusts button size */
+    font-size: 18px; /* Increases text size */
+    color: white; /* White text */
+    text-decoration: none; /* Removes underline from the link */
+    border: none; /* Removes any default border */
+    cursor: pointer; /* Adds a pointer on hover */
+    border-radius: 5px; /* Rounds the corners */
 }
 
-.card button:hover{
-    color: #B7A57A; /* Change text color on hover */
+.card .button:hover {
+    color: #B7A57A; /* Changes text color on hover to gold */
 }
 
 .introduction {
@@ -277,7 +279,7 @@ body {
     width: 50%;
     margin: 50px auto;
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: #EcE9E2;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }

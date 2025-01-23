@@ -27,7 +27,68 @@
         </div>
     </header>
     <main>
+        <div class="form-container">
+            <form action="/submit" method="post">
+                <!-- Existing form fields -->
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+    
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+    
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+                <small>Format: 123-456-7890</small>
 
+                <!-- upload profile picture -->
+                <div class="upload-profile-picture">
+                    <legend><strong>Upload Profile Picture:</strong></legend>
+                    <input type="file" id="profile-picture" name="profile-picture" accept="image/*">
+                </div>
+
+
+                <div class="self-introduction">
+                    <legend><strong>Self Introduction:</strong></legend>
+                    <textarea id="self-introduction" name="self-introduction" rows="5" placeholder="Write about yourself..."></textarea>
+                </div>
+                
+
+                <!-- Role Selection -->
+                <div class="roles">
+                    <legend>Role (Select up to 3):</legend>
+                    <label>
+                        <input type="checkbox" name="role" value="oftware-engineer">
+                        <span>Software Engineer</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" name="role" value="promoter">
+                        <span>Promoter</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" name="role" value="designer">
+                        <span>Designer</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" name="role" value="presenter">
+                        <span>Presenter</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" name="role" value="storyteller">
+                        <span>Storyteller</span>
+                    </label>
+                </div>
+                              
+    
+                <!-- Customize Role -->
+                <div class="customize-role">
+                    <legend><strong>Customize Role:</strong></legend>
+                    <input type="text" id="custom-role" name="custom-role" placeholder="Enter your custom role">
+                </div>
+                
+                <!-- Submit Button -->
+                <button type="submit">Submit</button>
+            </form>
+        </div>
         
     </main>
     <footer>

@@ -261,3 +261,188 @@ img {
 .project_name {
     flex: 2;
 }
+
+
+/*yujie's*/
+/* General body style */
+body {
+    font-family: "Encode Sans Compressed", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+}
+
+/* Form container styles */
+.form-container {
+    width: 50%;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Form label styles */
+form label {
+    display: block;
+    margin: 10px 0 5px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Input and textarea styles */
+form input, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Small text (hints) styles */
+form small {
+    display: block;
+    margin: -10px 0 10px;
+    font-size: 12px;
+}
+
+/* Submit button styles */
+form button {
+    display: inline-block;
+    background-color: #4b2e83;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+form button:hover {
+    background-color: #3a2266; 
+}
+
+/* Roles container styling */
+.roles {
+    margin-bottom: 20px;
+}
+
+/* Add bold style to the legend */
+.roles legend {
+    font-size: 18px;
+    font-weight: bold; 
+    margin-bottom: 10px;
+}
+
+/* Align items horizontally and fine-tune text position */
+.roles label {
+    display: flex; 
+    align-items: center; 
+    font-size: 16px;
+    margin-bottom: 10px; 
+}
+
+.roles input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #4b2e83;
+    border-radius: 50%; 
+    margin-right: 10px; 
+}
+
+.roles input[type="checkbox"]:checked {
+    background-color: #4b2e83;
+    border-color: #4b2e83;
+}
+
+.roles input[type="checkbox"]:hover {
+    border-color: #B7A57A;
+}
+
+.roles label span {
+    position: relative; 
+    top: -6px; 
+}
+
+/* Customize Role styling */
+.customize-role legend {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+/* Style for the input box */
+.customize-role input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.customize-role input:focus {
+    border-color: #4b2e83;
+    outline: none;
+    box-shadow: 0 0 5px rgba(75, 46, 131, 0.5);
+}
+
+
+/* Upload Profile Picture container styling */
+.upload-profile-picture {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.upload-profile-picture legend {
+    font-size: 18px;
+    font-weight: bold; 
+    margin-bottom: 10px;
+    display: block; 
+}
+
+/* Style for the file input */
+.upload-profile-picture input[type="file"] {
+    display: block; 
+    margin-top: 10px;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.upload-profile-picture input[type="file"]:focus {
+    border-color: #4b2e83;
+    outline: none;
+    box-shadow: 0 0 5px rgba(75, 46, 131, 0.5);
+}
+
+/* Self Introduction container styling */
+.self-introduction {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.self-introduction legend {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+/* Style for the textarea */
+.self-introduction textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: inherit; 
+    font-family: inherit; 
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+}
+
+.self-introduction textarea:focus {
+    border-color: #4b2e83;
+    outline: none;
+    box-shadow: 0 0 5px rgba(75, 46, 131, 0.5);
+}

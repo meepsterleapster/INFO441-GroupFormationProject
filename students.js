@@ -18,4 +18,3 @@ function searchStudents() {
         }
     });
 }
-//1

@@ -12,4 +12,3 @@ function searchProjects() {
         }
     });
 }
-//1

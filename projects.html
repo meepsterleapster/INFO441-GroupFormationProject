@@ -17,6 +17,42 @@
                 project.style.display = matches ? "flex" : "none";
             });
         }
+
+        // 添加的
+        document.addEventListener("DOMContentLoaded", function () {
+            
+            const projects = JSON.parse(localStorage.getItem("projects")) || [];
+            const projectsContainer = document.querySelector(".projects");
+
+            
+            projects.forEach(project => {
+                const projectDiv = document.createElement("div");
+                projectDiv.classList.add("project");
+
+                projectDiv.innerHTML = `
+                    <div class="project_name">
+                        <h2><a href="#">${project.name}</a></h2>
+                    </div>
+                    <div class="project_member">
+                        <h4>Starter: ${project.starter}</h4>
+                        <h4>Members:</h4>
+                        <p>${project.members.join(", ")}</p>
+                    </div>
+                    <div class="memeber_count">
+                        <span>${project.progress}</span>
+                    </div>
+                    <div>
+                        <button class="join_button">Join</button>
+                    </div>
+                `;
+
+                projectsContainer.appendChild(projectDiv);
+            });
+
+            console.log("Projects loaded:", projects);
+        });
+        // 添加的
+
     </script>
 </head>
 <body>

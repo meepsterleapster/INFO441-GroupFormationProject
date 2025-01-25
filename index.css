@@ -484,3 +484,17 @@ form button:hover {
     outline: none;
     box-shadow: 0 0 5px rgba(75, 46, 131, 0.5);
 } 
+
+
+.dynamic-projects {
+    margin-top: 20px; 
+    padding: 10px 0;
+}
+
+.dynamic-projects .project:nth-child(odd) {
+    background-color: #f9f9f9; 
+}
+
+.dynamic-projects .project:nth-child(even) {
+    background-color: #ffffff;
+}

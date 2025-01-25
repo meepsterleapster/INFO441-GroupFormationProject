@@ -18,13 +18,19 @@
             });
         }
 
-        // 添加的
-        document.addEventListener("DOMContentLoaded", function () {
-            
-            const projects = JSON.parse(localStorage.getItem("projects")) || [];
-            const projectsContainer = document.querySelector(".projects");
+        // 加的
 
-            
+        function clearDynamicProjects() {
+            const dynamicProjectsContainer = document.querySelector(".dynamic-projects");
+            dynamicProjectsContainer.innerHTML = "";
+            localStorage.removeItem("projects");
+            console.log("Dynamic projects cleared.");
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const projects = JSON.parse(localStorage.getItem("projects")) || [];
+            const dynamicProjectsContainer = document.querySelector(".dynamic-projects");
+
             projects.forEach(project => {
                 const projectDiv = document.createElement("div");
                 projectDiv.classList.add("project");
@@ -46,12 +52,12 @@
                     </div>
                 `;
 
-                projectsContainer.appendChild(projectDiv);
+                dynamicProjectsContainer.appendChild(projectDiv);
             });
 
-            console.log("Projects loaded:", projects);
+            console.log("Dynamic projects loaded:", projects);
         });
-        // 添加的
+        // 加的
 
     </script>
 </head>
@@ -83,6 +89,10 @@
             </div>
             <div>
                 <a class="create_button" href="create_pro.html">Create a Project</a>
+
+                
+                <button class="clear_button" onclick="clearDynamicProjects()">refresh</button>
+            </div>
             </div>
         </div>
         <div class="projects">
@@ -117,7 +127,11 @@
                 <div>
                     <button class="join_button">Join</button>
                 </div>
+
             </div>
+            <Dynamically generated items will be inserted here>
+            <div class="dynamic-projects"></div>
+
         </div>
     </main>
     <footer></footer>

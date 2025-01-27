@@ -210,13 +210,13 @@ img {
 }
 
 .create_button:hover, .search_pro_button:hover{
-    background-color: #FEE282;
+    background-color: #FEC049;
 }
 
-.projects .project:nth-child(odd) {
+.projects .project:nth-child(odd), .my_projects .project:nth-child(odd) {
     background-color: #f5f5f5; /* Grey (246) */
 }
-.projects .project:nth-child(even) {
+.projects .project:nth-child(even), .my_projects .project:nth-child(even) {
     background-color: white; /* Grey (246) */
 }
 
@@ -256,7 +256,7 @@ img {
 }
 
 .join_button:hover{
-    background-color: #C1D5FF;
+    background-color: #99BBFF;
 }
 
 .project div {
@@ -264,9 +264,78 @@ img {
     text-align: left;
 }
 
-
 .project_name {
     flex: 2;
+}
+
+/* my_projects styling */
+.project_request {
+    margin-bottom: 20px;
+}
+
+.delete_button{
+    background-color: #FF5C5C;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.delete_button:hover{
+    background-color: #E04A4A;
+}
+
+.my_projects {
+    margin: 40px 0 20px 0;
+}
+
+.request {
+    background-color: #eeeeee;
+    display: flex;
+    flex-direction: row;
+    padding: 15px 15px;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.request span {
+    flex: 3;
+    text-align: left;
+}
+
+.request span a{
+    color: #015c89;
+    text-decoration: none;
+}
+
+.a_d_button {
+    flex: 1;
+}
+
+.accept {
+    background-color: #5CB85C;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.decline {
+    background-color: #FF5C5C;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.decline:hover{
+    background-color: #E04A4A;
+}
+
+.accept:hover {
+    background-color: #4CA54C;
 }
 
 /* other_pro style */

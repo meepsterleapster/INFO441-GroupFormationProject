@@ -1,5 +1,6 @@
 import '../index.css';
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 export function HeaderBar({}){
 
@@ -13,7 +14,7 @@ export function HeaderBar({}){
             <a href="index.html">Students</a>
           </li>
           <li className="menu_item">
-            <a href="projects.html">Projects</a>
+            <Link to="/projects">Projects</Link>
           </li>
           <li className="menu_button">
             <div className="profile-menu">

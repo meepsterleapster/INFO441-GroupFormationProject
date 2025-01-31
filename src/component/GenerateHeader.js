@@ -23,7 +23,7 @@ export function HeaderBar({}){
               </button>
                 <ul className={`submenu ${showMenu ? 'show' : ''}`}>
                   <li className="profile">
-                    <a href="profile.html">Profile</a>
+                    <li className="profile"><Link to="/profile">Profile</Link></li>
                   </li>
                   <li className="projects">
                     <a href="my_projects.html">Projects</a>

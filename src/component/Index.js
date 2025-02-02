@@ -3,10 +3,10 @@ import "../index.css";
 import { SearchBar } from './StudentSearch.js';
 import { CardsPanel } from "./GenerateCards.js";
 
-export function StudentPool({resourceData}){
+export function StudentPool({resourceData, filterStudents}){
     return (
         <>
-        <SearchBar></SearchBar>
+        <SearchBar filterStudents = {filterStudents}></SearchBar>
         <CardsPanel resourceData = {resourceData}></CardsPanel>
         </>
     );

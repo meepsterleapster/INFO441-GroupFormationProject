@@ -1,7 +1,7 @@
 import '../index.css';
 import React, { useState } from "react";
 
-export function SearchBar({}){
+export function SearchBar({filterStudents}){
 
     const [searchInput, setsearchInput] = useState('');
     
@@ -10,7 +10,7 @@ export function SearchBar({}){
     };
 
     const handleSearchClick = () => {
-        return;
+        filterStudents(searchInput);
     }
     return (
         <div className="search">

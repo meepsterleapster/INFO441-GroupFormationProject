@@ -12,12 +12,24 @@ import INITIAL_DATA from '../data/studentdata.json';
 import PRO_DATA from '../data/projectdata.json';
 
 export default function App() {
+    const [currentInput, setcurrentInput] = useState('');
+
+    const filterStudents = (SearchInfo) =>{
+        setcurrentInput(SearchInfo);
+    }
+
+    const filteredStudents = INITIAL_DATA.filter(student => 
+        student.name.toLowerCase().includes(currentInput.toLowerCase()) ||
+        student.roles.some(role => role.toLowerCase().includes(currentInput.toLowerCase())) ||
+        student.email.toLowerCase().includes(currentInput.toLowerCase())
+    );
+
     return (
         <Router>
             <HeaderBar></HeaderBar>
             <main>
                 <Routes>
-                    <Route path="/" element={<StudentPool resourceData={INITIAL_DATA}/>} />
+                    <Route path="/" element={<StudentPool resourceData={filteredStudents} filterStudents={filterStudents}/>} />
                     <Route path="/projects" element={<ProjectsPanel resourceData={PRO_DATA}/>} />
                     <Route path="/create-project" element={<CreateProject />} />
                     <Route path="/profile" element={<UploadProfile />} />

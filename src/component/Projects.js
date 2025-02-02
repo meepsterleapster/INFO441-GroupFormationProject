@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import "../index.css";
 import { Link } from "react-router-dom";
 
-export function Projects() {
+export function Projects({resourceData}) {
+    console.log(resourceData);
     const [projects, setProjects] = useState([]);
     const [searchInput, setSearchInput] = useState("");
 

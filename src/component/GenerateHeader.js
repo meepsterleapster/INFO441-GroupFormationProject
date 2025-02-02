@@ -11,7 +11,7 @@ export function HeaderBar({}){
       <div className="navBar">
         <ul className="menu">
           <li className="menu_item">
-            <a href="index.html">Students</a>
+            <Link to="/">Students</Link>
           </li>
           <li className="menu_item">
             <Link to="/projects">Projects</Link>
@@ -23,7 +23,7 @@ export function HeaderBar({}){
               </button>
                 <ul className={`submenu ${showMenu ? 'show' : ''}`}>
                   <li className="profile">
-                    <li className="profile"><Link to="/profile">Profile</Link></li>
+                    <Link to="/profile">Profile</Link>
                   </li>
                   <li className="projects">
                     <a href="my_projects.html">Projects</a>

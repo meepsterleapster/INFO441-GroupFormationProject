@@ -184,6 +184,7 @@ img {
     padding: 3px;
     border-radius: 5px;
     background-color: white;
+    margin-right: 5px;
 }
 
 /* project */
@@ -423,6 +424,7 @@ form button {
     border: none;
     border-radius: 5px;
     font-size: 16px;
+    cursor: pointer;
 }
 
 form button:hover {
@@ -473,28 +475,6 @@ form button:hover {
     top: -6px; 
 }
 
-/* Customize Role styling */
-.customize-role legend {
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
-/* Style for the input box */
-.customize-role input {
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-.customize-role input:focus {
-    border-color: #4b2e83;
-    outline: none;
-    box-shadow: 0 0 5px rgba(75, 46, 131, 0.5);
-}
-
 
 /* Upload Profile Picture container styling */
 .upload-profile-picture {
@@ -529,7 +509,7 @@ form button:hover {
 /* Self Introduction container styling */
 .self-introduction {
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .self-introduction legend {

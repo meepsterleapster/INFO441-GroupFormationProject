@@ -5,7 +5,7 @@ import img from '../data/img/QkjX5_5c.jpg'
 export function SingleStudent({ studentData }){
 
     const roleElements = studentData.roles.map((role, index) => (
-        <span key={index}>{role}</span>
+        <span key={role}>{role}</span>
     ));
 
     return(

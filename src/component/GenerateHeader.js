@@ -26,7 +26,7 @@ export function HeaderBar({}){
                     <Link to="/profile">Profile</Link>
                   </li>
                   <li className="projects">
-                    <a href="my_projects.html">Projects</a>
+                    <Link to="/myProjects">Projects</Link>
                   </li>
                   <li className="group">
                     <a href="group.html">Group</a>

@@ -1,25 +1,33 @@
 import React, { useState, useEffect } from "react";
 import "../index.css";
 import { Link } from "react-router-dom";
+import { Project } from "./SingleProject";
 
-export function Projects({resourceData}) {
-    console.log(resourceData);
-    const [projects, setProjects] = useState([]);
+export function ProjectsPanel({resourceData}) {
+    // const [projects, setProjects] = useState([]);
     const [searchInput, setSearchInput] = useState("");
 
-    useEffect(() => {
-        const storedProjects = JSON.parse(localStorage.getItem("projects")) || [];
-        setProjects(storedProjects);
-    }, []);
+    // useEffect(() => {
+    //     const storedProjects = JSON.parse(localStorage.getItem("projects")) || [];
+    //     setProjects(storedProjects);
+    // }, []);
 
     const handleSearch = (event) => {
         setSearchInput(event.target.value.toLowerCase());
     };
 
-    const filteredProjects = projects.filter(project =>
-        project.name.toLowerCase().includes(searchInput) ||
-        project.members.some(member => member.toLowerCase().includes(searchInput))
-    );
+    const allProjects = resourceData.map((project, index)=>{
+        return (<Project key = {index} projectData={project}></Project>);
+    });
+
+    // const filteredProjects = projects.filter(project =>
+    //     project.name.toLowerCase().includes(searchInput) ||
+    //     project.members.some(member => member.toLowerCase().includes(searchInput))
+    // );
+
+    const handleSearchSumbit = (event) => {
+        return;
+    }
 
     return (
         <div>
@@ -32,7 +40,7 @@ export function Projects({resourceData}) {
                             value={searchInput}
                             onChange={handleSearch}
                         />
-                        <button className="search_pro_button">Search</button>
+                        <button className="search_pro_button" onSubmit={handleSearchSumbit}>Search</button>
                     </div>
                     <div>
                         <Link className="create_button" to="/create-project">Create a Project</Link>
@@ -40,7 +48,8 @@ export function Projects({resourceData}) {
                 </div>
 
                 <div className="projects">
-                    {filteredProjects.length > 0 ? (
+                    {allProjects}
+                    {/* {filteredProjects.length > 0 ? (
                         filteredProjects.map((project, index) => (
                             <div key={index} className="project">
                                 <div className="project_name">
@@ -61,7 +70,7 @@ export function Projects({resourceData}) {
                         ))
                     ) : (
                         <p>No projects found.</p>
-                    )}
+                    )} */}
                 </div>
             </main>
         </div>

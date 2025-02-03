@@ -25,7 +25,7 @@ export default function App() {
     );
 
     return (
-        <Router>
+        <>
             <HeaderBar></HeaderBar>
             <main>
                 <Routes>
@@ -36,6 +36,6 @@ export default function App() {
                     <Route path="/myProjects" element={<MyProjects resourceData={PRO_DATA}/>} />
                 </Routes>
             </main>
-        </Router>
+        </>
     );
 }

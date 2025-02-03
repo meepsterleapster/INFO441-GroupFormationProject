@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export function UploadProfile(props){
@@ -9,8 +9,16 @@ export function UploadProfile(props){
     const [proImage, setProImage] = useState(null);
     const [intro, setIntro] = useState('');
     const [roles, setRoles] = useState([]);
+    const [submitStatus, setSubmitStatus] = useState(null);
+    const [errorMessage, setErrorMessage] = useState('');
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        if (!name || !email || !phone || !proImage || !intro || roles.length === 0) {
+            setErrorMessage("Please fill out all required fields.");
+            setSubmitStatus(null);
+            return;
+          }
         return;
     }
 

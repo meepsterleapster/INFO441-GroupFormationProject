@@ -427,6 +427,28 @@ form button {
     cursor: pointer;
 }
 
+.alert_message {
+    background-color: #FBE7E8; /* Light red background */
+    color: #a94442; /* Dark red text */
+    border: 1px solid #D36473; /* Red border */
+    padding: 12px;
+    border-radius: 5px;
+    font-weight: 600;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.alert_success {
+    background-color: #D8EDF6; /* Light red background */
+    color: #55758B; /* Dark red text */
+    border: 1px solid #5D829B; /* Red border */
+    padding: 12px;
+    border-radius: 5px;
+    font-weight: 600;
+    text-align: center;
+    margin: 10px 0;
+}
+
 form button:hover {
     background-color: #3a2266; 
 }

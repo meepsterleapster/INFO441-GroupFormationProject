@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../index.css";
-import img from '../data/img/QkjX5_5c.jpg'
+import img from '../data/img/person.png'
 
 export function SingleStudent({ studentData }){
 

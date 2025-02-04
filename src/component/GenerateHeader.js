@@ -1,6 +1,7 @@
 import '../index.css';
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import img from '../data/img/person.png'
 
 export function HeaderBar({}){
 
@@ -19,7 +20,7 @@ export function HeaderBar({}){
           <li className="menu_button">
             <div className="profile-menu">
               <button className="users" onClick={() => setShowMenu(!showMenu)}>
-                <img src='/' alt="person" />
+                <img src={img} alt="default" />
               </button>
                 <ul className={`submenu ${showMenu ? 'show' : ''}`}>
                   <li className="profile">

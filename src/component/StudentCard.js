@@ -12,7 +12,7 @@ export function SingleStudent({ studentData }){
         <div className="card">
         <img
             src={img}
-            alt="person"
+            alt="default"
         />
         <div className="introduction">
             <h2>{studentData.name}</h2>

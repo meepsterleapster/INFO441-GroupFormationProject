@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import "../index.css";
-import img from '../data/img/person.png'
+import { Link } from 'react-router-dom';
+import img from '../data/img/person.png';
 
 export function SingleStudent({ studentData }){
 
-    const roleElements = studentData.roles.map((role, index) => (
+    const roleElements = studentData.roles.map((role) => (
         <span key={role}>{role}</span>
     ));
 
@@ -18,9 +19,12 @@ export function SingleStudent({ studentData }){
             <h2>{studentData.name}</h2>
             {roleElements}
         </div>
-        <a href="other_pro.html" className="button">
+
+        <Link to={`/student/${studentData.firebaseKey}`}>
+        <button className="button">
             more
-        </a>
+        </button>
+        </Link>
         </div>
     );
 }

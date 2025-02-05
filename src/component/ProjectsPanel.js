@@ -1,33 +1,43 @@
 import React, { useState, useEffect } from "react";
 import "../index.css";
 import { Link } from "react-router-dom";
+import PRO_DATA from "../data/projectdata.json";
 import { Project } from "./SingleProject";
+import { getDatabase, ref, onValue } from "firebase/database";
 
-export function ProjectsPanel({resourceData}) {
-    // const [projects, setProjects] = useState([]);
+export function ProjectsPanel() {
+    const [projects, setProjects] = useState(PRO_DATA); //local data
     const [searchInput, setSearchInput] = useState("");
+    const [filteredProjects, setFilteredProjects] = useState(PRO_DATA);
 
-    // useEffect(() => {
-    //     const storedProjects = JSON.parse(localStorage.getItem("projects")) || [];
-    //     setProjects(storedProjects);
-    // }, []);
+    //Firebase 数据
+    useEffect(() => {
+        if (window.location.hostname !== "localhost") {
+            const db = getDatabase();
+            const projectRef = ref(db, "Projects");
+
+            onValue(projectRef, (snapshot) => {
+                const firebaseProjects = snapshot.val();
+                if (firebaseProjects) {
+                    const firebaseData = Object.values(firebaseProjects);
+                    setProjects(firebaseData); // 仅 Firebase 版本加载新数据
+                    setFilteredProjects(firebaseData); // 让搜索栏也能筛选 Firebase 数据
+                }
+            });
+        }
+    }, []);
 
     const handleSearch = (event) => {
         setSearchInput(event.target.value.toLowerCase());
     };
 
-    const allProjects = resourceData.map((project, index)=>{
-        return (<Project key = {index} projectData={project}></Project>);
-    });
-
-    // const filteredProjects = projects.filter(project =>
-    //     project.name.toLowerCase().includes(searchInput) ||
-    //     project.members.some(member => member.toLowerCase().includes(searchInput))
-    // );
-
-    const handleSearchSumbit = (event) => {
-        return;
-    }
+    const handleSearchClick = () => {
+        const filtered = projects.filter(project =>
+            project.projectName.toLowerCase().includes(searchInput) ||
+            project.members.some(member => member.toLowerCase().includes(searchInput))
+        );
+        setFilteredProjects(filtered);
+    };
 
     return (
         <div>
@@ -40,7 +50,7 @@ export function ProjectsPanel({resourceData}) {
                             value={searchInput}
                             onChange={handleSearch}
                         />
-                        <button className="search_pro_button" onSubmit={handleSearchSumbit}>Search</button>
+                        <button className="search_pro_button" onClick={handleSearchClick}>Search</button>
                     </div>
                     <div>
                         <Link className="create_button" to="/create-project">Create a Project</Link>
@@ -48,29 +58,13 @@ export function ProjectsPanel({resourceData}) {
                 </div>
 
                 <div className="projects">
-                    {allProjects}
-                    {/* {filteredProjects.length > 0 ? (
+                    {filteredProjects.length > 0 ? (
                         filteredProjects.map((project, index) => (
-                            <div key={index} className="project">
-                                <div className="project_name">
-                                    <h2>{project.name}</h2>
-                                </div>
-                                <div className="project_member">
-                                    <h4>Starter: {project.starter}</h4>
-                                    <h4>Members:</h4>
-                                    <p>{project.members.join(", ")}</p>
-                                </div>
-                                <div className="memeber_count">
-                                    <span>{project.progress}</span>
-                                </div>
-                                <div>
-                                    <button className="join_button">Join</button>
-                                </div>
-                            </div>
+                            <Project key={index} projectData={project} />
                         ))
                     ) : (
                         <p>No projects found.</p>
-                    )} */}
+                    )}
                 </div>
             </main>
         </div>

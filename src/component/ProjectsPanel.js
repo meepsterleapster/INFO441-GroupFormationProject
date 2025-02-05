@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from "react";
 import "../index.css";
 import { Link } from "react-router-dom";
-import PRO_DATA from "../data/projectdata.json";
+// import PRO_DATA from "../data/projectdata.json";
 import { Project } from "./SingleProject";
 import { getDatabase, ref, onValue } from "firebase/database";
 
 export function ProjectsPanel() {
-    const [projects, setProjects] = useState(PRO_DATA); //local data
+    const [projects, setProjects] = useState(''); //local data
     const [searchInput, setSearchInput] = useState("");
-    const [filteredProjects, setFilteredProjects] = useState(PRO_DATA);
+    const [filteredProjects, setFilteredProjects] = useState('');
 
     //Firebase 数据
     useEffect(() => {
-        if (window.location.hostname !== "localhost") {
             const db = getDatabase();
             const projectRef = ref(db, "Projects");
 
@@ -24,7 +23,6 @@ export function ProjectsPanel() {
                     setFilteredProjects(firebaseData); // 让搜索栏也能筛选 Firebase 数据
                 }
             });
-        }
     }, []);
 
     const handleSearch = (event) => {
@@ -34,7 +32,8 @@ export function ProjectsPanel() {
     const handleSearchClick = () => {
         const filtered = projects.filter(project =>
             project.projectName.toLowerCase().includes(searchInput) ||
-            project.members.some(member => member.toLowerCase().includes(searchInput))
+            project.members.some(member => member.toLowerCase().includes(searchInput)) ||
+            project.starter.toLowerCase().includes(searchInput)
         );
         setFilteredProjects(filtered);
     };

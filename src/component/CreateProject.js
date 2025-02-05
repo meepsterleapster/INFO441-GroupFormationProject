@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "../index.css";
-import { useNavigate } from "react-router-dom";
 import { getDatabase, ref, push } from "firebase/database";
 
 export function CreateProject() {
@@ -8,7 +7,8 @@ export function CreateProject() {
     const [starter, setStarter] = useState("");
     const [members, setMembers] = useState(["", "", ""]);
     const [projectDetail, setProjectDetail] = useState("");
-    const navigate = useNavigate();
+    const [submitStatus, setSubmitStatus] = useState(null);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleMemberChange = (index, value) => {
         const newMembers = [...members];
@@ -16,7 +16,15 @@ export function CreateProject() {
         setMembers(newMembers);
     };
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        if (!projectName || !starter || !projectDetail) {
+            setErrorMessage("Please fill out required fields *");
+            setSubmitStatus(null);
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            return;
+          }
+        
         const filteredMembers = members.filter(member => member.trim() !== "");
         const totalMembers = filteredMembers.length + 1; // Includes starter
         const maxMembers = 4;
@@ -36,17 +44,36 @@ export function CreateProject() {
             await push(projectRef, newProject);
             console.log("Project added to Firebase");
 
-            navigate("/projects");
+            setProjectName('');
+            setStarter('');
+            setMembers(["", "", ""]);
+            setProjectDetail('');
+            setSubmitStatus("success");
+            setErrorMessage("");
+
         } catch (error) {
-            console.error("Error adding project to Firebase: ", error);
+            console.error("Error submitting data: ", error);
+            setSubmitStatus("error");
+            setErrorMessage("Error submitting data, please try again.");
         }
     };
 
     return (
         <div className="form-container">
-            <h2>Create a Project</h2>
             <form>
-                <label>Project Name:</label>
+                {submitStatus === "success" && (
+                    <div className="alert_success">
+                    Data submitted successfully!
+                    </div>
+                )}
+
+                {(submitStatus === "error" || errorMessage) && (
+                    <div className="alert_message">
+                    {errorMessage}
+                    </div>
+                )}
+
+                <label>Project Name <span style={{ color: "red" }}>*</span></label>
                 <input
                     type="text"
                     value={projectName}
@@ -54,7 +81,7 @@ export function CreateProject() {
                     required
                 />
 
-                <label>Starter:</label>
+                <label>Starter <span style={{ color: "red" }}>*</span></label>
                 <input
                     type="text"
                     value={starter}
@@ -62,7 +89,7 @@ export function CreateProject() {
                     required
                 />
 
-                <label>Members (Up to 3):</label>
+                <label>Members (Up to 3)</label>
                 {members.map((member, index) => (
                     <input
                         key={index}
@@ -73,7 +100,7 @@ export function CreateProject() {
                     />
                 ))}
 
-                <label>Project Detail:</label>
+                <label>Project Detail <span style={{ color: "red" }}>*</span></label>
                 <textarea
                     value={projectDetail}
                     onChange={(e) => setProjectDetail(e.target.value)}

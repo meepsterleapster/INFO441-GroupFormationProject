@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../index.css";
 import { useNavigate } from "react-router-dom";
+import { getDatabase, ref, push } from "firebase/database";
 
 export function CreateProject() {
     const [projectName, setProjectName] = useState("");
@@ -15,24 +16,30 @@ export function CreateProject() {
         setMembers(newMembers);
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         const filteredMembers = members.filter(member => member.trim() !== "");
         const totalMembers = filteredMembers.length + 1; // Includes starter
         const maxMembers = 4;
 
         const newProject = {
-            name: projectName,
+            projectName,
             starter,
             members: filteredMembers,
-            detail: projectDetail,
-            progress: `${totalMembers} / ${maxMembers}`,
+            projectDetail,
+            count: `${totalMembers} / ${maxMembers}`,
+            request: [],
         };
 
-        const existingProjects = JSON.parse(localStorage.getItem("projects")) || [];
-        existingProjects.push(newProject);
-        localStorage.setItem("projects", JSON.stringify(existingProjects));
+        try {
+            const db = getDatabase();
+            const projectRef = ref(db, "Projects");
+            await push(projectRef, newProject);
+            console.log("Project added to Firebase");
 
-        navigate("/projects");
+            navigate("/projects");
+        } catch (error) {
+            console.error("Error adding project to Firebase: ", error);
+        }
     };
 
     return (

@@ -147,7 +147,7 @@ export function UploadProfile(props){
             <div className="roles">
                 <legend>Role (Select up to 3) <span style={{ color: "red" }}>*</span></legend>
                 <label>
-                    <input type="checkbox" name="role" defaultValue="software-engineer" onChange={handleRoleChange}/>
+                    <input type="checkbox" name="role" defaultValue="software engineer" onChange={handleRoleChange}/>
                     <span>Software Engineer</span>
                 </label>
                 <label>

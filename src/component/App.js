@@ -8,6 +8,7 @@ import { ProjectsPanel } from "./ProjectsPanel.js";
 import { CreateProject } from "./CreateProject";
 import { UploadProfile } from './Profile.js';
 import { MyProjects } from './MyProjects.js';
+import { StudentDetail } from './StudentDetail.js';
 
 // import INITIAL_DATA from '../data/studentdata.json';
 import PRO_DATA from '../data/projectdata.json';
@@ -53,6 +54,7 @@ export default function App() {
                 <Routes>
                     <Route path="/" element={<StudentPool resourceData={filteredStudents} filterStudents={filterStudents}/>} />
                     <Route path="/projects" element={<ProjectsPanel resourceData={PRO_DATA}/>} />
+                    <Route path="student/:studentKey" element={<StudentDetail resourceData={filteredStudents}/>} />
                     <Route path="/create-project" element={<CreateProject />} />
                     <Route path="/profile" element={<UploadProfile />} />
                     <Route path="/myProjects" element={<MyProjects resourceData={PRO_DATA}/>} />

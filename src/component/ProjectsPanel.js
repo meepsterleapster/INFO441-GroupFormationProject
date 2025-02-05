@@ -8,25 +8,36 @@ import { getDatabase, ref, onValue } from "firebase/database";
 export function ProjectsPanel() {
     const [projects, setProjects] = useState(PRO_DATA); //local data
     const [searchInput, setSearchInput] = useState("");
+    const [filteredProjects, setFilteredProjects] = useState(PRO_DATA);
 
     //Firebase 数据
     useEffect(() => {
-        const db = getDatabase();
-        const projectRef = ref(db, "Projects");
+        if (window.location.hostname !== "localhost") {
+            const db = getDatabase();
+            const projectRef = ref(db, "Projects");
 
-        onValue(projectRef, (snapshot) => {
-            console.log("New Firebase Data:", snapshot.val()); 
-        });
+            onValue(projectRef, (snapshot) => {
+                const firebaseProjects = snapshot.val();
+                if (firebaseProjects) {
+                    const firebaseData = Object.values(firebaseProjects);
+                    setProjects(firebaseData); // 仅 Firebase 版本加载新数据
+                    setFilteredProjects(firebaseData); // 让搜索栏也能筛选 Firebase 数据
+                }
+            });
+        }
     }, []);
 
     const handleSearch = (event) => {
         setSearchInput(event.target.value.toLowerCase());
     };
 
-    const filteredProjects = projects.filter(project =>
-        project.projectName.toLowerCase().includes(searchInput) ||
-        project.members.some(member => member.toLowerCase().includes(searchInput))
-    );
+    const handleSearchClick = () => {
+        const filtered = projects.filter(project =>
+            project.projectName.toLowerCase().includes(searchInput) ||
+            project.members.some(member => member.toLowerCase().includes(searchInput))
+        );
+        setFilteredProjects(filtered);
+    };
 
     return (
         <div>
@@ -39,6 +50,7 @@ export function ProjectsPanel() {
                             value={searchInput}
                             onChange={handleSearch}
                         />
+                        <button className="search_pro_button" onClick={handleSearchClick}>Search</button>
                     </div>
                     <div>
                         <Link className="create_button" to="/create-project">Create a Project</Link>

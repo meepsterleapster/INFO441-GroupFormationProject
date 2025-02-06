@@ -30,10 +30,10 @@ export function HeaderBar({}){
                     <Link to="/myProjects">Projects</Link>
                   </li>
                   <li className="group">
-                    <a href="group.html">Group</a>
+                    <Link to="/group">Group</Link>
                   </li>
                   <li className="logout">
-                    <a href="logout.html">Logout</a>
+                    <Link to="/logout">Logout</Link>
                   </li>
                 </ul>
             </div>

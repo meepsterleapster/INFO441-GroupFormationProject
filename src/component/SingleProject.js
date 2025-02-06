@@ -4,15 +4,14 @@ import { Link } from "react-router-dom";
 
 
 export function Project({ projectData }){
-
     
         return (
         <div className="project">
             <div className="project_name">
                 <h2>
-                <a href="#">
+                <Link to={`/projects/${projectData.firebaseKey}`}>
                     {projectData.projectName}
-                </a>
+                </Link>
                 </h2>
             </div>
             <div className="project_member">

@@ -3,7 +3,6 @@ import img from '../data/img/person.png';
 
 
 export function StudentDetail({resourceData}){
-    console.log("Resource Data:", resourceData);
     const { studentKey } = useParams();
     console.log(studentKey);
     let student = resourceData.find(item => item.firebaseKey === studentKey);

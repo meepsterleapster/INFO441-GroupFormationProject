@@ -3,34 +3,22 @@ import "../index.css";
 import { Link } from "react-router-dom";
 // import PRO_DATA from "../data/projectdata.json";
 import { Project } from "./SingleProject";
-import { getDatabase, ref, onValue } from "firebase/database";
 
-export function ProjectsPanel() {
-    const [projects, setProjects] = useState(''); //local data
+export function ProjectsPanel( {resourceData} ) {
+    // console.log(resourceData);
     const [searchInput, setSearchInput] = useState("");
-    const [filteredProjects, setFilteredProjects] = useState('');
+    const [filteredProjects, setFilteredProjects] = useState(resourceData);
 
-    //Firebase 数据
     useEffect(() => {
-            const db = getDatabase();
-            const projectRef = ref(db, "Projects");
-
-            onValue(projectRef, (snapshot) => {
-                const firebaseProjects = snapshot.val();
-                if (firebaseProjects) {
-                    const firebaseData = Object.values(firebaseProjects);
-                    setProjects(firebaseData); // 仅 Firebase 版本加载新数据
-                    setFilteredProjects(firebaseData); // 让搜索栏也能筛选 Firebase 数据
-                }
-            });
-    }, []);
+        setFilteredProjects(resourceData);
+    }, [resourceData]);
 
     const handleSearch = (event) => {
         setSearchInput(event.target.value.toLowerCase());
     };
 
     const handleSearchClick = () => {
-        const filtered = projects.filter(project =>
+        const filtered = resourceData.filter(project =>
             project.projectName.toLowerCase().includes(searchInput) ||
             project.members.some(member => member.toLowerCase().includes(searchInput)) ||
             project.starter.toLowerCase().includes(searchInput)
@@ -62,7 +50,8 @@ export function ProjectsPanel() {
                             <Project key={index} projectData={project} />
                         ))
                     ) : (
-                        <p>No projects found.</p>
+                        // <p>No projects found.</p>
+                        <p></p>
                     )}
                 </div>
             </main>

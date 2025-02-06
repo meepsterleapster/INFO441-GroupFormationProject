@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import img from '../data/img/person.png';
 
 export function SingleStudent({ studentData }){
-
     const roleElements = studentData.roles.map((role) => (
         <span key={role}>{role}</span>
     ));

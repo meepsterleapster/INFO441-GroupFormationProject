@@ -148,23 +148,23 @@ export function UploadProfile(props){
             <div className="roles">
                 <legend>Role (Select up to 2) <span style={{ color: "red" }}>*</span></legend>
                 <label>
-                    <input type="checkbox" name="role" defaultValue="product manager" onChange={handleRoleChange} disabled={roles.length >= 2 && !roles.includes("product manager")}/>
+                    <input type="checkbox" name="role" defaultValue="Product Manager" onChange={handleRoleChange} disabled={roles.length >= 2 && !roles.includes("Product Manager")}/>
                     <span>Product Manager</span>
                 </label>
                 <label>
-                    <input type="checkbox" name="role" defaultValue="software engineer" onChange={handleRoleChange} disabled={roles.length >= 2 && !roles.includes("software engineer")}/>
+                    <input type="checkbox" name="role" defaultValue="Software Engineer" onChange={handleRoleChange} disabled={roles.length >= 2 && !roles.includes("Software Engineer")}/>
                     <span>Software Engineer</span>
                 </label>
                 <label>
-                    <input type="checkbox" name="role" defaultValue="data science" onChange={handleRoleChange} disabled={roles.length >= 2 && !roles.includes("data science")}/>
+                    <input type="checkbox" name="role" defaultValue="Data Science" onChange={handleRoleChange} disabled={roles.length >= 2 && !roles.includes("Data Science")}/>
                     <span>Data Science</span>
                 </label>
                 <label>
-                    <input type="checkbox" name="role" defaultValue="designer" onChange={handleRoleChange} disabled={roles.length >= 2 && !roles.includes("designer")}/>
+                    <input type="checkbox" name="role" defaultValue="Designer" onChange={handleRoleChange} disabled={roles.length >= 2 && !roles.includes("Designer")}/>
                     <span>Designer</span>
                 </label>
                 <label>
-                    <input type="checkbox" name="role" defaultValue="researcher" onChange={handleRoleChange} disabled={roles.length >= 2 && !roles.includes("researcher")}/>
+                    <input type="checkbox" name="role" defaultValue="Researcher" onChange={handleRoleChange} disabled={roles.length >= 2 && !roles.includes("Researcher")}/>
                     <span>Researcher</span>
                 </label>
             </div>

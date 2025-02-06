@@ -3,6 +3,9 @@
 ## Overview
 Group Finder is a web application designed to help students efficiently form teams based on their skills, goals, and interests. This platform improves upon the traditional group-making mixer by providing an intuitive interface for profile creation, team discovery, and team management.
 
+## Current Demo
+https://groupin-1fb78.web.app
+
 ## Features
 ### Student Profiles
 - Users can create and edit personal profiles
@@ -21,11 +24,13 @@ Group Finder is a web application designed to help students efficiently form tea
 - Interactive UI for user engagement
 - Pages include:
   - **Login/Signup Page**: User authentication and registration
-  - **Profile Page**: Displays and manages student profiles
-  - **List of Students Page**: Shows all registered students for browsing
-  - **Team Discovery Page**: Lists available teams and search options
-  - **Team Detail Page**: Displays information about specific teams
-  - **Create Team Page**: Allows users to create and customize their own teams
+  - **Students Pool Page**: Shows all registered students for browsing
+  - **Profile Detail Page**: Displays and manages student profiles
+  - **Project Pool Page**: Lists available project ideas to join and search options
+  - **Project Detail Page**: Displays information about specific projects
+  - **Create Project Page**: Allows users to create and customize their own projects
+  - **My project Page**: Lists all projects created by current user
+  - **My group Page**: List the project the user currently in
 
 ### Back-End
 - Manages user authentication, team creation, and data storage
@@ -45,7 +50,7 @@ Group Finder is a web application designed to help students efficiently form tea
 - student upload
 - project search
 - project upload
-- my_project(demo) - https://groupin-1fb78.web.app/
+- my_project(demo)
   
 # group name:JJYK
 Member：Kevin Tran, Jihan Yang, Jinchuan Wu, Yujie Hu 

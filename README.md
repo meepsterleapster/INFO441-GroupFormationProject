@@ -48,6 +48,6 @@ Group Finder is a web application designed to help students efficiently form tea
 
 ### my_project(demo)
 - https://groupin-1fb78.web.app/
-- 
+  
 # group name:JJYK
 Member：Kevin Tran, Jihan Yang, Jinchuan Wu, Yujie Hu 

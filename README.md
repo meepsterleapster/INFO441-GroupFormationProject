@@ -41,4 +41,4 @@ Group Finder is a web application designed to help students efficiently form tea
 - Stores notifications for team join requests
 
 # group name:JJYK
-Kevin Tran, Jihan Yang, Jinchuan Wu, Yujie Hu 
+Member：Kevin Tran, Jihan Yang, Jinchuan Wu, Yujie Hu 

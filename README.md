@@ -9,14 +9,14 @@ https://groupin-1fb78.web.app
 ## Features
 ### Student Profiles
 - Users can create and edit personal profiles
-- Profiles include skills, interests, and availability
+- Profiles include skills, interests, and introduction
 
-### Group Creation
-- Users can create teams and specify requirements for team members
-- Team leaders can manage their teams, including inviting or removing members
+### Project Creation
+- Users can create projects and specify team members
+- Team leaders can manage their projects, including accepting and declining join requests
 
-### Search 
-- Users can search for teams based on interests, required skills, and availability
+### Search
+- Users can search for projects based on interests, required skills, and availability
 - Filtering options allow students to find the best match for their needs
 
 ## Architecture
@@ -24,8 +24,9 @@ https://groupin-1fb78.web.app
 - Interactive UI for user engagement
 - Pages include:
   - **Login/Signup Page**: User authentication and registration
+  - **Profile Upload**: User can upload and update their profile
   - **Students Pool Page**: Shows all registered students for browsing
-  - **Profile Detail Page**: Displays and manages student profiles
+  - **Profile Detail Page**: Displays detailed student profiles
   - **Project Pool Page**: Lists available project ideas to join and search options
   - **Project Detail Page**: Displays information about specific projects
   - **Create Project Page**: Allows users to create and customize their own projects
@@ -35,15 +36,15 @@ https://groupin-1fb78.web.app
 ### Back-End
 - Manages user authentication, team creation, and data storage
 - API handles:
-  - Student registration, login, and authentication
-  - Team creation, editing, and deletion
-  - Team join requests and notifications
+  - Student login and authentication
+  - Project creation and deletion
+  - Project join requests and notifications
 
 ### Database (Firebase)
 - Stores user login credentials
 - Stores student profiles
-- Stores team details and requests
-- Stores notifications for team join requests
+- Stores project details and requests
+- Stores notifications for project join requests
 
 ### Currently implemented functions
 - student search

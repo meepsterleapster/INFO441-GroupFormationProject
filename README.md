@@ -25,12 +25,19 @@
 ## API Endpoints
 
 GET /user/login - Allows users to log into their account.
+
 POST /user/register - Allows users to register for an account.
+
 POST /project/create - Allows users to create a project
+
 DELETE /project/delete - Allows users to delete a project
+
 GET /user/:id/profile - Allows users to view their own profile depending on an ID.
+
 GET /project/view - Allows users to view available projects
+
 POST /project/interaction - Updates counter for number of people in group project 
+
 GET /project/:id - Allows users to view a specific group project depending on an ID.
 
 ## Database Schemas:

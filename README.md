@@ -17,7 +17,7 @@
 | P3       | As a group leader            | I want to be able to delete my project.                                            | “Delete” action issues **DELETE** request to remove project document from MongoDB.                                                              |
 
 ## Architectural Diagram 
-![Screenshot 2025-05-09 150916](https://github.com/user-attachments/assets/c40db3e5-235e-4a40-8139-f436fced653e)
+![Person Diagram](project-draft/Asset/Screenshot 2025-05-09 at 9.38.39 PM.png)
 
 ## API Endpoints
 

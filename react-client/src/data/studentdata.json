@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Ding Zhen",
+        "email": "jicnw@uw.edu",
+        "phone": 4258667534,
+        "roles": ["Software Engineer", "Designer"],
+        "intro": "a good entertainer",
+        "proImage": "./img/DSC04650.JPG"
+      },
+
+      {
+        "name": "Changshu Anuo",
+        "email": "jiccdnw@uw.edu",
+        "phone": 4259667534,
+        "roles": ["Researcher", "Designer"],
+        "intro": "a good entertainer",
+        "proImage": "/img/Steve.jpg"
+      },
+
+      {
+        "name": "Xiang Zuo",
+        "email": "jicnfdw@uw.edu",
+        "phone": 4258607534,
+        "roles": ["Software Engineer", "Researcher"],
+        "intro": "a good entertainer",
+        "proImage": "/img/Steve.jpg"
+      },
+      
+      {
+        "name": "Ding Ding",
+        "email": "jicnfdcdw@uw.edu",
+        "phone": 4258666534,
+        "roles": ["Product Manager", "Researcher"],
+        "intro": "a good entertainer",
+        "proImage": "/img/Steve.jpg"
+      }
+]

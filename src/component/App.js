@@ -5,7 +5,7 @@ import { StudentPool } from './Index.js';
 import { Routes, Route, Navigate } from "react-router-dom";
 import { getDatabase, onValue, ref} from 'firebase/database';
 import { ProjectsPanel } from "./ProjectsPanel.js";
-import { CreateProject } from "./CreateProject";
+import { CreateProject } from "./CreateProject.js";
 import { UploadProfile } from './Profile.js';
 import { MyProjects } from './MyProjects.js';
 import { StudentDetail } from './StudentDetail.js';

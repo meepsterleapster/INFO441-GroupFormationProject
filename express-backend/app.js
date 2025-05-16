@@ -5,8 +5,9 @@ import logger from 'morgan';
 import usersRouter from './routes/users.js';
 import groupsRouter from './routes/groups.js';
 import { createProxyMiddleware } from 'http-proxy-middleware';
+import session from 'express-session';
 import request from 'request';
-
+import models from './models.js'
 //import usersRouter from './routes/users.js';
 
 import { fileURLToPath } from 'url';
@@ -27,6 +28,16 @@ app.use((req, res, next) => {
 	req.models = models
 	next();
 })
+
+app.use(session({
+	secret: 'your_secret_key',
+	resave: false,
+	saveUninitialized: true,
+	cookie: {
+		maxAge: 24 * 60 * 60 * 1000 // 1 day
+	}
+})
+)
 
 
 import WebAppAuthProvider from 'msal-node-wrapper'

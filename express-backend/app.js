@@ -22,7 +22,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
 	req.models = models
@@ -84,11 +84,11 @@ app.use('/users', usersRouter);
 
 app.use('/groups', groupsRouter);
 
-// app.use('/*', createProxyMiddleware({
-//     target: 'http://localhost:3000',
-//     changeOrigin: true,
-//     pathRewrite: (path, req) => req.baseUrl
-// }));
+app.use('/*', createProxyMiddleware({
+    target: 'https://groupin-1fb78.web.app/',
+    changeOrigin: true,
+    pathRewrite: (path, req) => req.baseUrl
+}));
 
 
 export default app;

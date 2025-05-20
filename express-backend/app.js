@@ -2,13 +2,17 @@ import express from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
-import usersRouter from './routes/users.js';
+import usersRouter from './routes/profile.js';
 import groupsRouter from './routes/groups.js';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import session from 'express-session';
 import request from 'request';
 import models from './models.js'
+
 //import usersRouter from './routes/users.js';
+
+
+// npm install "https://gitpkg.now.sh/kylethayer/ms-identity-javascript-nodejs-tutorial-msal-node-v2-/Common/msal-node-wrapper?main"
 
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -80,15 +84,41 @@ app.get('/signout', (req, res, next) => {
 
 });
 
-app.use('/users', usersRouter);
+app.use('/profile', usersRouter);
 
 app.use('/groups', groupsRouter);
 
 app.use('/*', createProxyMiddleware({
-    target: 'https://groupin-1fb78.web.app/',
+	target: 'http://localhost:4000',
+    //target: 'https://groupin-1fb78.web.app/',
     changeOrigin: true,
     pathRewrite: (path, req) => req.baseUrl
 }));
 
+// use this by going to urls like: 
+// http://localhost:3000/fakelogin?name=anotheruser
+app.get('/fakelogin', (req, res) => {
+    let newName = req.query.name;
+    let session=req.session;
+    session.isAuthenticated = true;
+    if(!session.account){
+        session.account = {};
+    }
+    session.account.name = newName;
+    session.account.username = newName;
+    console.log("set session");
+    //res.redirect("/api/v3/users/myIdentity");
+});
+
+// use this by going to a url like: 
+// http://localhost:3000/fakelogout
+app.get('/fakelogout', (req, res) => {
+    let newName = req.query.name;
+    let session=req.session;
+    session.isAuthenticated = false;
+    session.account = {};
+    console.log("you have fake logged out");
+    res.redirect("/api/v3/users/myIdentity");
+});
 
 export default app;

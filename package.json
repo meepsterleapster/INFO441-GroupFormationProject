@@ -8,6 +8,7 @@
     "firebase": "^11.3.0",
     "mongodb": "^6.16.0",
     "mongoose": "^8.14.3",
+    "msal-node-wrapper": "https://gitpkg.now.sh/kylethayer/ms-identity-javascript-nodejs-tutorial-msal-node-v2-/Common/msal-node-wrapper?main",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.1.5",

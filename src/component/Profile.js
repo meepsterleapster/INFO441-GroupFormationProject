@@ -24,17 +24,27 @@ export function UploadProfile(props){
           }
         
         try {
-            const formData = {
-                name,
-                email,
-                phone,
-                intro,
-                roles
-            };
-
-            const db = getDatabase();
-            const studentRef = ref(db, `Students`);
-            await push(studentRef, formData);
+            // const formData = {
+            //     name,
+            //     email,
+            //     phone,
+            //     intro,
+            //     roles
+            await fetch("profile/posts", {
+                method: "POST",
+            body: JSON.stringify({ 
+               // username: ,
+                name: name,
+                email: email,
+                phone: phone,
+                picture: proImage,
+                role: roles,
+                description: intro
+            })     
+        })
+            //const db = getDatabase();
+            // const studentRef = ref(db, `Students`);
+            // await push(studentRef, formData);
             console.log("Data submitted successfully");
 
             event.target.reset();

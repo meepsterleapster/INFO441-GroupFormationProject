@@ -22,8 +22,6 @@ export function UploadProfile(props){
             window.scrollTo({ top: 0, behavior: "smooth" });
             return;
           }
-        
-        // test comment
 
         try {
             // const formData = {
@@ -32,6 +30,9 @@ export function UploadProfile(props){
             //     phone,
             //     intro,
             //     roles
+
+            // test adding this again
+            // not adding?
             await fetch("profile/posts", {
                 method: "POST",
             body: JSON.stringify({ 

@@ -8,7 +8,7 @@ import { createProxyMiddleware } from 'http-proxy-middleware';
 import session from 'express-session';
 import request from 'request';
 //import models from './models.js'
-import { initModels } from './models.js'; 
+import { initModels } from './models.js';
 //import usersRouter from './routes/users.js';
 
 
@@ -53,6 +53,7 @@ const authConfig = {
 		authority: "https://login.microsoftonline.com/f6b6dd5b-f02f-441a-99a0-162ac5060bd2",
 		clientSecret: "4KE8Q~bIrtcI5UOzxJybQW0Jh6peVTteke8TOb4w",
 		redirectUri: "/redirect"
+
 	},
 	system: {
 		loggerOptions: {
@@ -74,7 +75,7 @@ app.use(authProvider.authenticate());
 
 app.get('/signin', (req, res, next) => {
 	return req.authContext.login({
-		postLoginRedirectUri: "/", // redirect here after login
+		postLoginRedirectUri: "/profile", // redirect here after login
 	})(req, res, next);
 
 });
@@ -91,35 +92,35 @@ app.use('/projects', projectsRouter);
 
 app.use('/*', createProxyMiddleware({
 	target: 'http://localhost:4000',
-    //target: 'https://groupin-1fb78.web.app/',
-    changeOrigin: true,
-    pathRewrite: (path, req) => req.baseUrl
+	//target: 'https://groupin-1fb78.web.app/',
+	changeOrigin: true,
+	pathRewrite: (path, req) => req.baseUrl
 }));
 
 // use this by going to urls like: 
 // http://localhost:3000/fakelogin?name=anotheruser
 app.get('/fakelogin', (req, res) => {
-    let newName = req.query.name;
-    let session=req.session;
-    session.isAuthenticated = true;
-    if(!session.account){
-        session.account = {};
-    }
-    session.account.name = newName;
-    session.account.username = newName;
-    console.log("set session");
-    //res.redirect("/api/v3/users/myIdentity");
+	let newName = req.query.name;
+	let session = req.session;
+	session.isAuthenticated = true;
+	if (!session.account) {
+		session.account = {};
+	}
+	session.account.name = newName;
+	session.account.username = newName;
+	console.log("set session");
+	//res.redirect("/api/v3/users/myIdentity");
 });
 
 // use this by going to a url like: 
 // http://localhost:3000/fakelogout
 app.get('/fakelogout', (req, res) => {
-    let newName = req.query.name;
-    let session=req.session;
-    session.isAuthenticated = false;
-    session.account = {};
-    console.log("you have fake logged out");
-    res.redirect("/api/v3/users/myIdentity");
+	let newName = req.query.name;
+	let session = req.session;
+	session.isAuthenticated = false;
+	session.account = {};
+	console.log("you have fake logged out");
+	res.redirect("/api/v3/users/myIdentity");
 });
 
 export default app;

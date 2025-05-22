@@ -3,7 +3,7 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import usersRouter from './routes/profile.js';
-import groupsRouter from './routes/groups.js';
+import projectsRouter from './routes/project.js';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import session from 'express-session';
 import request from 'request';
@@ -87,7 +87,7 @@ app.get('/signout', (req, res, next) => {
 
 app.use('/profile', usersRouter);
 
-app.use('/groups', groupsRouter);
+app.use('/projects', projectsRouter);
 
 app.use('/*', createProxyMiddleware({
 	target: 'http://localhost:4000',

@@ -10,8 +10,8 @@ router.post('/posts', async function(req, res, next) {
   console.log("testing post")
   // save to mongo db now
   try {
-    const newProfile = new req.Models.User({
-        username: '',
+    const newProfile = new req.models.User({
+        username: 'Test',
         name: req.body.name,
         email: req.body.email,
         phone: req.body.phone,

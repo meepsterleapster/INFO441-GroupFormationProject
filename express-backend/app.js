@@ -7,8 +7,8 @@ import groupsRouter from './routes/groups.js';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import session from 'express-session';
 import request from 'request';
-import models from './models.js'
-
+//import models from './models.js'
+import { initModels } from './models.js'; 
 //import usersRouter from './routes/users.js';
 
 
@@ -17,6 +17,7 @@ import models from './models.js'
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
+const models = await initModels();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 

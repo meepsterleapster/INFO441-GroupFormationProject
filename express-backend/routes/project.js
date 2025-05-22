@@ -4,10 +4,11 @@ var router = express.Router();
 
 router.post('/posts', async function(req, res, next) {
   console.log("testing post")
+  console.log("incoming body:", req.body);
   try {
-    const newProject = new req.Models.Project({
+    const newProject = new req.models.Project({
         projectName: req.body.projectName,
-        projectDescription: req.body.projectDetail,
+        projectDescription: req.body.projectDescription,
         projectMembers: req.body.members,
         projectStarter: ''
     })

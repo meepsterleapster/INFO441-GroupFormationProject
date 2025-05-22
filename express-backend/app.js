@@ -75,7 +75,7 @@ app.use(authProvider.authenticate());
 
 app.get('/signin', (req, res, next) => {
 	return req.authContext.login({
-		postLoginRedirectUri: "/profile", // redirect here after login
+		postLoginRedirectUri: "http://localhost:4000", // redirect here after login
 	})(req, res, next);
 
 });
@@ -90,7 +90,7 @@ app.use('/profile', usersRouter);
 
 app.use('/projects', projectsRouter);
 
-app.use('/*', createProxyMiddleware({
+app.use('*', createProxyMiddleware({
 	target: 'http://localhost:4000',
 	//target: 'https://groupin-1fb78.web.app/',
 	changeOrigin: true,

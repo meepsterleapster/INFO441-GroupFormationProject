@@ -82,7 +82,7 @@ export default function App() {
                     <Route path="/create-project" element={<CreateProject />} />
                     <Route path="/profile" element={<UploadProfile />} />
                     <Route path="/myProjects" element={<MyProjects resourceData={PRO_DATA}/>} />
-                    <Route path="*" element={<Navigate to="/" />} />
+                    {/* <Route path="*" element={<Navigate to="/" />} /> */}
                 </Routes>
             </main>
         </>

@@ -22,19 +22,32 @@ export function UploadProfile(props){
             window.scrollTo({ top: 0, behavior: "smooth" });
             return;
           }
-        
-        try {
-            const formData = {
-                name,
-                email,
-                phone,
-                intro,
-                roles
-            };
 
-            const db = getDatabase();
-            const studentRef = ref(db, `Students`);
-            await push(studentRef, formData);
+        try {
+            // const formData = {
+            //     name,
+            //     email,
+            //     phone,
+            //     intro,
+            //     roles
+
+            // test adding this again
+            // not adding?
+            await fetch("profile/posts", {
+                method: "POST",
+            body: JSON.stringify({ 
+               // username: ,
+                name: name,
+                email: email,
+                phone: phone,
+                picture: proImage,
+                role: roles,
+                description: intro
+            })     
+        })
+            //const db = getDatabase();
+            // const studentRef = ref(db, `Students`);
+            // await push(studentRef, formData);
             console.log("Data submitted successfully");
 
             event.target.reset();

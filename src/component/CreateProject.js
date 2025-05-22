@@ -39,10 +39,20 @@ export function CreateProject() {
         };
 
         try {
-            const db = getDatabase();
-            const projectRef = ref(db, "Projects");
-            await push(projectRef, newProject);
-            console.log("Project added to Firebase");
+            // const db = getDatabase();
+            // const projectRef = ref(db, "Projects");
+            // await push(projectRef, newProject);
+            // console.log("Project added to Firebase");
+
+            await fetch("projects/posts", {
+                method: "POST",
+                body: JSON.stringify({ 
+                    projectName: projectName,
+                    projectDescription: projectDetail,
+                    projectMembers: members,
+                    projectStarter: '',
+                })     
+            })
 
             setProjectName('');
             setStarter('');

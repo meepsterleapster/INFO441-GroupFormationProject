@@ -46,6 +46,7 @@ export function CreateProject() {
 
             await fetch("projects/posts", {
                 method: "POST",
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ 
                     projectName: projectName,
                     projectDescription: projectDetail,

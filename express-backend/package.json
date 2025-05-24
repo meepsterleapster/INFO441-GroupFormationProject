@@ -13,6 +13,7 @@
     "express-session": "^1.18.1",
     "http-proxy-middleware": "^3.0.5",
     "mongodb": "^6.16.0",
+    "mongoose": "^8.15.0",
     "morgan": "~1.9.1",
     "msal-node-wrapper": "https://gitpkg.now.sh/kylethayer/ms-identity-javascript-nodejs-tutorial-msal-node-v2-/Common/msal-node-wrapper?main",
     "request": "^2.88.2"

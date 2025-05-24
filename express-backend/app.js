@@ -52,7 +52,7 @@ const authConfig = {
 		clientId: "d6d21e51-a295-4b0e-b79c-fedcff02e6eb",
 		authority: "https://login.microsoftonline.com/f6b6dd5b-f02f-441a-99a0-162ac5060bd2",
 		clientSecret: "4KE8Q~bIrtcI5UOzxJybQW0Jh6peVTteke8TOb4w",
-		redirectUri: "/redirect"
+		redirectUri: "/redirect",
 
 	},
 	system: {
@@ -75,7 +75,7 @@ app.use(authProvider.authenticate());
 
 app.get('/signin', (req, res, next) => {
 	return req.authContext.login({
-		postLoginRedirectUri: "http://localhost:4000", // redirect here after login
+		postLoginRedirectUri: "http://localhost:3000", // redirect here after login
 	})(req, res, next);
 
 });

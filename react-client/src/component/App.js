@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import '../index.css'; 
-import {HeaderBar} from './GenerateHeader.js';
+import '../index.css';
+import { HeaderBar } from './GenerateHeader.js';
 import { StudentPool } from './Index.js';
 import { Routes, Route, Navigate } from "react-router-dom";
-import { getDatabase, onValue, ref} from 'firebase/database';
+import { getDatabase, onValue, ref } from 'firebase/database';
 import { ProjectsPanel } from "./ProjectsPanel.js";
 import { CreateProject } from "./CreateProject";
 import { UploadProfile } from './Profile.js';
@@ -15,76 +15,79 @@ import { ProjectDetail } from './ProjectDetail.js';
 import PRO_DATA from '../data/projectdata.json';
 
 export default function App() {
-    const [currentInput, setcurrentInput] = useState('');
-    const [allStudents, setAllStudents] = useState([]);
-    const [projects, setProjects] = useState('');
+  const [currentInput, setcurrentInput] = useState('');
+  const [allStudents, setAllStudents] = useState([]);
+  const [projects, setProjects] = useState([]);
 
-    const filterStudents = (SearchInfo) =>{
-        setcurrentInput(SearchInfo);
+  const filterStudents = (SearchInfo) => {
+    setcurrentInput(SearchInfo);
+  }
+
+  const filteredStudents = allStudents.filter(student =>
+    student.name.toLowerCase().includes(currentInput.toLowerCase()) ||
+    student.roles.some(role => role.toLowerCase().includes(currentInput.toLowerCase())) ||
+    student.email.toLowerCase().includes(currentInput.toLowerCase())
+  );
+
+  async function fetchProjects() {
+    try {
+      const response = await fetch('/projects');
+      const { projects: data } = await response.json();
+      // Optional transformation: rename _id to firebaseKey to match legacy structure
+      const transformedProjects = data.map(p => ({
+        firebaseKey: p._id,
+        projectName: p.projectName,
+        projectDescription: p.projectDescription,
+        starter: p.projectStarter ?? '',
+        members: Array.isArray(p.projectMembers) ? p.projectMembers : [],
+        count: Array.isArray(p.projectMembers) ? p.projectMembers.length : 0,
+      }));
+      setProjects(transformedProjects);
+    } catch (error) {
+      console.error('Failed to fetch projects:', error);
+      setProjects([]);
     }
+  }
 
-    const filteredStudents = allStudents.filter(student => 
-        student.name.toLowerCase().includes(currentInput.toLowerCase()) ||
-        student.roles.some(role => role.toLowerCase().includes(currentInput.toLowerCase())) ||
-        student.email.toLowerCase().includes(currentInput.toLowerCase())
-    );
+  useEffect(() => {
 
-
-    useEffect(() => {
-        const db = getDatabase();
-        const studentRef = ref(db, 'Students');
     
-        onValue(studentRef, (snapshot) => {
-          const allstudentObj = snapshot.val();
-          if (allstudentObj) {
-            const keyArray = Object.keys(allstudentObj);
-            const allstudentArray = keyArray.map((key) => {
-              const transformed = allstudentObj[key];
-              transformed.firebaseKey = key;
-              return transformed;
-            });
-            setAllStudents(allstudentArray);
-          } else {
-            setAllStudents([]); 
-          }
-        });
-      }, []);
+    // const db = getDatabase();
+    // const projectRef = ref(db, "Projects");
 
-      useEffect(() => {
-        const db = getDatabase();
-        const projectRef = ref(db, "Projects");
+    // onValue(projectRef, (snapshot) => {
+    //   const firebaseProjects = snapshot.val();
+    //   if (firebaseProjects) {
+    //     const keyArray = Object.keys(firebaseProjects);
+    //     const allprojectData = keyArray.map((key) => {
+    //       const transformed = firebaseProjects[key];
+    //       transformed.firebaseKey = key;
+    //       return transformed;
+    //     });
+    //     setProjects(allprojectData);
+    //   } else {
+    //     setProjects([]);
+    //   }
+    // });
+    
+    fetchProjects();
+  }, []);
 
-        onValue(projectRef, (snapshot) => {
-            const firebaseProjects = snapshot.val();
-            if (firebaseProjects) {
-              const keyArray = Object.keys(firebaseProjects);
-                const allprojectData = keyArray.map((key) => {
-                  const transformed = firebaseProjects[key];
-                  transformed.firebaseKey = key;
-                  return transformed;
-                });
-                setProjects(allprojectData);
-            } else {
-                setProjects([]);
-            }
-        });
-      }, []);
-
-    return (
-        <>
-            <HeaderBar></HeaderBar>
-            <main>
-                <Routes>
-                    <Route path="/" element={<StudentPool resourceData={filteredStudents} filterStudents={filterStudents}/>} />
-                    <Route path="student/:studentKey" element={<StudentDetail resourceData={filteredStudents}/>} />
-                    <Route path="/projects" element={<ProjectsPanel resourceData={projects}/>} />
-                    <Route path="projects/:projectKey" element={<ProjectDetail resourceData={projects}/>} />
-                    <Route path="/create-project" element={<CreateProject />} />
-                    <Route path="/profile" element={<UploadProfile />} />
-                    <Route path="/myProjects" element={<MyProjects resourceData={PRO_DATA}/>} />
-                    {/* <Route path="*" element={<Navigate to="/" />} /> */}
-                </Routes>
-            </main>
-        </>
-    );
+  return (
+    <>
+      <HeaderBar></HeaderBar>
+      <main>
+        <Routes>
+          <Route path="/" element={<StudentPool resourceData={filteredStudents} filterStudents={filterStudents} />} />
+          <Route path="student/:studentKey" element={<StudentDetail resourceData={filteredStudents} />} />
+          <Route path="/projects" element={<ProjectsPanel resourceData={projects} />} />
+          <Route path="projects/:projectKey" element={<ProjectDetail resourceData={projects} />} />
+          <Route path="/create-project" element={<CreateProject refreshList={fetchProjects} />} />
+          <Route path="/profile" element={<UploadProfile />} />
+          <Route path="/myProjects" element={<MyProjects resourceData={PRO_DATA} />} />
+          {/* <Route path="*" element={<Navigate to="/" />} /> */}
+        </Routes>
+      </main>
+    </>
+  );
 }

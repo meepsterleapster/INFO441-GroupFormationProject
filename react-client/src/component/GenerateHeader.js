@@ -33,10 +33,10 @@ export function HeaderBar({ }) {
                   <Link to="/group">Group</Link>
                 </li>
                 <li className="login">
-                  <a href="http://localhost:3000/signin">Login</a>
+                  <a href="/signin">Login</a>
                 </li>
                 <li className="logout">
-                  <a href="http://localhost:3000/signout">Log Out</a>
+                  <a href="/signout">Log Out</a>
                 </li>
               </ul>
             </div>

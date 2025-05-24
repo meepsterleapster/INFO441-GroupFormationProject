@@ -25,7 +25,7 @@ export function Project({ projectData }){
             </div>
             <div className="memeber_count">
                 <span>
-                    {projectData.count}
+                   1
                 </span>
             </div>
             <div>

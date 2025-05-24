@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import "../index.css";
 import { getDatabase, ref, push } from "firebase/database";
 
-export function CreateProject() {
+export function CreateProject(props) {
+    const { refreshList = () => { } } = props;
     const [projectName, setProjectName] = useState("");
     const [starter, setStarter] = useState("");
     const [members, setMembers] = useState(["", "", ""]);
@@ -23,8 +24,8 @@ export function CreateProject() {
             setSubmitStatus(null);
             window.scrollTo({ top: 0, behavior: "smooth" });
             return;
-          }
-        
+        }
+
         const filteredMembers = members.filter(member => member.trim() !== "");
         const totalMembers = filteredMembers.length + 1; // Includes starter
         const maxMembers = 4;
@@ -43,17 +44,26 @@ export function CreateProject() {
             // const projectRef = ref(db, "Projects");
             // await push(projectRef, newProject);
             // console.log("Project added to Firebase");
+            const res = await fetch('/profile/posterName', {
+                method: 'GET',              
+                credentials: 'include',     //
+            });
+            const { username } = await res.json(); 
+
+
 
             await fetch("projects/posts", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ 
+                body: JSON.stringify({
                     projectName: projectName,
                     projectDescription: projectDetail,
                     projectMembers: members,
-                    projectStarter: '',
-                })     
+                    projectStarter: username ?? '',
+                })
             })
+
+            await refreshList();
 
             setProjectName('');
             setStarter('');
@@ -74,13 +84,13 @@ export function CreateProject() {
             <form>
                 {submitStatus === "success" && (
                     <div className="alert_success">
-                    Data submitted successfully!
+                        Data submitted successfully!
                     </div>
                 )}
 
                 {(submitStatus === "error" || errorMessage) && (
                     <div className="alert_message">
-                    {errorMessage}
+                        {errorMessage}
                     </div>
                 )}
 

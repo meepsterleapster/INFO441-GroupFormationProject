@@ -90,13 +90,25 @@ app.use('/profile', usersRouter);
 
 app.use('/projects', projectsRouter);
 
-app.use('*', createProxyMiddleware({
-	target: 'http://localhost:4000',
-	//target: 'https://groupin-1fb78.web.app/',
-	changeOrigin: true,
-	pathRewrite: (path, req) => req.baseUrl
-}));
+if (process.env.NODE_ENV === 'production') {
+	const clientBuildPath = path.join(__dirname, '..', 'react-client', 'build');
+	app.use(express.static(clientBuildPath));
 
+	// React Router fallback
+	app.get('*', (req, res) =>
+		res.sendFile(path.join(clientBuildPath, 'index.html'))
+	);
+} else {
+	// -------- Development fallback to React dev-server
+	app.use(
+		'*',
+		createProxyMiddleware({
+			target: 'http://localhost:4000',
+			changeOrigin: true,
+			pathRewrite: (path, req) => req.baseUrl,
+		})
+	);
+}
 // use this by going to urls like: 
 // http://localhost:3000/fakelogin?name=anotheruser
 app.get('/fakelogin', (req, res) => {

@@ -31,23 +31,34 @@ export default function App() {
 
 
     useEffect(() => {
-        const db = getDatabase();
-        const studentRef = ref(db, 'Students');
+      //   const db = getDatabase();
+      //   const studentRef = ref(db, 'Students');
     
-        onValue(studentRef, (snapshot) => {
-          const allstudentObj = snapshot.val();
-          if (allstudentObj) {
-            const keyArray = Object.keys(allstudentObj);
-            const allstudentArray = keyArray.map((key) => {
-              const transformed = allstudentObj[key];
-              transformed.firebaseKey = key;
-              return transformed;
-            });
-            setAllStudents(allstudentArray);
-          } else {
-            setAllStudents([]); 
-          }
-        });
+      //   onValue(studentRef, (snapshot) => {
+      //     const allstudentObj = snapshot.val();
+      //     if (allstudentObj) {
+      //       const keyArray = Object.keys(allstudentObj);
+      //       const allstudentArray = keyArray.map((key) => {
+      //         const transformed = allstudentObj[key];
+      //         transformed.firebaseKey = key;
+      //         return transformed;
+      //       });
+      //       setAllStudents(allstudentArray);
+      //     } else {
+      //       setAllStudents([]); 
+      //     }
+      //   });
+
+      // fetch version
+      fetch('/profile/profiles')
+        .then(res => res.json())
+        .then(data => {
+          setAllStudents(data);
+        })
+        .catch(err => {
+          console.error("Failed to load profiles from MongoDB", err)
+        })
+
       }, []);
 
       useEffect(() => {
@@ -81,7 +92,7 @@ export default function App() {
                     <Route path="projects/:projectKey" element={<ProjectDetail resourceData={projects}/>} />
                     <Route path="/create-project" element={<CreateProject />} />
                     <Route path="/profile" element={<UploadProfile />} />
-                    <Route path="/myProjects" element={<MyProjects resourceData={PRO_DATA}/>} />
+                    {<Route path="/myProjects" element={<MyProjects resourceData={PRO_DATA}/>} />}
                     {/* <Route path="*" element={<Navigate to="/" />} /> */}
                 </Routes>
             </main>

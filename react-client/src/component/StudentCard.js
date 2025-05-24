@@ -19,7 +19,7 @@ export function SingleStudent({ studentData }){
             {roleElements}
         </div>
 
-        <Link to={`/student/${studentData.firebaseKey}`}>
+        <Link to={`/student/${studentData._id}`}>
         <button className="button">
             more
         </button>

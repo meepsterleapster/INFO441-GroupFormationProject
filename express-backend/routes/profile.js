@@ -12,7 +12,7 @@ var router = express.Router();
   //   }
   // });
 
-  // need to push something new
+  // need to push something new again
 
 router.get('/posterName', (req, res) => {
   if (req.session?.account?.username) {

@@ -75,7 +75,7 @@ app.use(authProvider.authenticate());
 
 app.get('/signin', (req, res, next) => {
 	return req.authContext.login({
-		postLoginRedirectUri: "http://localhost:3000", // redirect here after login
+		postLoginRedirectUri: "/", // redirect here after login
 	})(req, res, next);
 
 });

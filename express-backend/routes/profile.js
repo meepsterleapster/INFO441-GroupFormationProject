@@ -26,7 +26,7 @@ router.post('/posts', async function (req, res, next) {
   // save to mongo db now
   try {
     const newProfile = new req.models.User({
-      username: req.session.account.username,
+      username: req.session?.account?.username ?? 'anonymous',
       name: req.body.name,
       email: req.body.email,
       phone: req.body.phone,

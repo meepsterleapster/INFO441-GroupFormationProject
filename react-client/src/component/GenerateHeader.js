@@ -1,11 +1,26 @@
 import '../index.css';
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import img from '../data/img/person.png'
 
 export function HeaderBar({ }) {
 
   const [showMenu, setShowMenu] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(null);
+
+  useEffect(() => {
+    async function checkLogin() {
+      try {
+        const res = await fetch('/profile/status', { credentials: 'include' });
+        const data = await res.json();
+        setIsLoggedIn(data.loggedIn);
+      } catch (err) {
+        console.error('Failed to verify login status:', err);
+        setIsLoggedIn(false);
+      }
+    }
+    checkLogin();
+  }, []);
 
   return (
     <header>
@@ -32,12 +47,15 @@ export function HeaderBar({ }) {
                 <li className="group">
                   <Link to="/group">Group</Link>
                 </li>
-                <li className="login">
-                  <a href="/signin">Login</a>
-                </li>
-                <li className="logout">
-                  <a href="/signout">Log Out</a>
-                </li>
+                {isLoggedIn ? (
+                  <li className="logout">
+                    <a href="/signout">Log Out</a>
+                  </li>
+                ) : (
+                  <li className="login">
+                    <a href="/signin">Login</a>
+                  </li>
+                )}
               </ul>
             </div>
           </li>

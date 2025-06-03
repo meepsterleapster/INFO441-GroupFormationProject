@@ -31,13 +31,19 @@ export function UploadProfile(props) {
             //     intro,
             //     roles
 
+            const res = await fetch('/profile/', {
+                method: 'GET',              
+                credentials: 'include',     //
+            });
+            const { username } = await res.json(); 
+
             // test adding this again
             // not adding?
             await fetch("profile/posts", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    // username: ,
+                   // username: username ?? '',
                     name: name,
                     email: email,
                     phone: phone,

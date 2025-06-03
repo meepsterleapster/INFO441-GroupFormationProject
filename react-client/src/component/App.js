@@ -49,6 +49,35 @@ export default function App() {
       //     }
       //   });
 
+
+    async function fetchProfiles() {
+    try {
+      const response = await fetch('/profiles');
+      const { profiles: data } = await response.json();
+      // Optional transformation: rename _id to firebaseKey to match legacy structure
+      const transformedProfiles = data.map(p => ({
+        // firebaseKey: p._id,
+        // projectName: p.projectName,
+        // projectDescription: p.projectDescription,
+        // starter: p.projectStarter ?? '',
+        // members: Array.isArray(p.projectMembers) ? p.projectMembers : [],
+        // count: Array.isArray(p.projectMembers) ? p.projectMembers.length : 0,
+        //username: String,
+        firebaseKey: p._id,
+        name: p.name,
+        email: p.email,
+        phone: p.phone,
+        picture: p.picture,
+        role: Array.isArray(p.roles) ? p.roles : [],
+        description: p.intro
+      }));
+      setProjects(transformedProjects);
+    } catch (error) {
+      console.error('Failed to fetch projects:', error);
+      setProjects([]);
+    }
+  }
+
       // fetch version
       fetch('/profile/profiles')
         .then(res => res.json())

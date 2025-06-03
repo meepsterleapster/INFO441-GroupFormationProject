@@ -12,6 +12,8 @@ var router = express.Router();
   //   }
   // });
 
+  // need to push something new
+
 router.get('/posterName', (req, res) => {
   if (req.session?.account?.username) {
     res.json({ username: req.session.account.username }); 

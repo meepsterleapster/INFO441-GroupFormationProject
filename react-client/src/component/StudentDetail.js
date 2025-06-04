@@ -5,11 +5,11 @@ import img from '../data/img/person.png';
 export function StudentDetail({resourceData}){
     const { studentKey } = useParams();
     console.log(studentKey);
-    let student = resourceData.find(item => item.firebaseKey === studentKey);
+    let student = resourceData.find(item => item._id === studentKey);
     if (!student) {
         return <h2>Student not found</h2>;
     }
-      const roleElements = student.roles.map((role) => (
+      const roleElements = (student.role || []).map((role) => (
         <span key={role}>{role}</span>
     ));
 
@@ -24,7 +24,7 @@ export function StudentDetail({resourceData}){
             {roleElements}
             </div>
             <p>
-            {student.intro}
+            {student.description}
             </p>
         </div>
         </div>

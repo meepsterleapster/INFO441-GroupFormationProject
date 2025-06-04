@@ -12,7 +12,23 @@ var router = express.Router();
   //   }
   // });
 
-  // need to push something new again
+  router.get('/', (req, res) => {
+  if (req.session?.account?.username) {
+    res.json({ username: req.session.account.username }); 
+  } else {
+    res.status(401).json({ error: 'Not logged in' });
+  }
+});
+
+router.get('/profiles', async (req, res) => {
+  try{
+    const profiles = await req.models.User.find({});
+    res.json({ profiles });
+  } catch(err) {
+    console.error("Failed to fetch profiles: ", err)
+    res.status(500).json({ status: "error", error: err.message })
+  }
+})
 
 router.get('/posterName', (req, res) => {
   if (req.session?.account?.username) {
@@ -28,7 +44,8 @@ router.post('/posts', async function (req, res, next) {
   // save to mongo db now
   try {
     const newProfile = new req.models.User({
-      username: req.session.account.username,
+      username: req.body.username,
+      //username: req.session.account.username,
       name: req.body.name,
       email: req.body.email,
       phone: req.body.phone,

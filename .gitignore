@@ -2,7 +2,7 @@
 
 # dependencies
 react-client/node_modules
-react-client/.cache/
+react-client/node_modules/.cache/
 /.pnp
 .pnp.js
 

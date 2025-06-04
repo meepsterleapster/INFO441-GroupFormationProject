@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import { getDatabase, ref, push } from 'firebase/database';
 
 
-export function UploadProfile(props) {
-
+export function UploadProfile({ fetchProfiles = () => {} }) {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
@@ -60,6 +59,9 @@ export function UploadProfile(props) {
             setIntro('');
             setSubmitStatus("success");
             setErrorMessage("");
+
+            fetchProfiles();
+
 
         } catch (error) {
             console.error("Error submitting data: ", error);

@@ -3,7 +3,7 @@ import "../index.css";
 import { getDatabase, ref, push } from "firebase/database";
 
 export function CreateProject(props) {
-    const { refreshList = () => { } } = props;
+    const { refreshList = () => { }, fetchProjects = () => { } } = props;
     const [projectName, setProjectName] = useState("");
     const [starter, setStarter] = useState("");
     const [members, setMembers] = useState(["", "", ""]);
@@ -45,10 +45,10 @@ export function CreateProject(props) {
             // await push(projectRef, newProject);
             // console.log("Project added to Firebase");
             const res = await fetch('/profile/posterName', {
-                method: 'GET',              
+                method: 'GET',
                 credentials: 'include',     //
             });
-            const { username } = await res.json(); 
+            const { username } = await res.json();
 
 
 
@@ -64,6 +64,10 @@ export function CreateProject(props) {
             })
 
             await refreshList();
+            if (fetchProjects) {
+                fetchProjects();
+            }
+
 
             setProjectName('');
             setStarter('');

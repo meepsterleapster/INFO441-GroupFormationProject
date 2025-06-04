@@ -21,100 +21,79 @@ export default function App() {
 
   const [projects, setProjects] = useState('');
 
-  const filterStudents = (SearchInfo) => {
-    setcurrentInput(SearchInfo);
+
+  const [searchResults, setSearchResults] = useState([]);
+
+  const fetchProfiles = async () => {
+    try {
+      const response = await fetch('profile/profiles');
+      const { profiles: data } = await response.json();
+
+      const transformedProfiles = data.map(p => ({
+        firebaseKey: p._id,
+        name: p.name,
+        email: p.email,
+        phone: p.phone,
+        picture: p.picture,
+        roles: Array.isArray(p.role) ? p.role : (p.role ? [p.role] : []),
+        description: p.description || '',
+      }));
+
+      setAllStudents(transformedProfiles);
+      setSearchResults(transformedProfiles);
+    } catch (error) {
+      console.error('Failed to fetch student profiles:', error);
+      setAllStudents([]);
+    }
+  };
+  async function fetchProjects() {
+    try {
+      const response = await fetch('/projects');
+      const { projects: data } = await response.json();
+      const transformedProjects = data.map(p => ({
+        firebaseKey: p._id,
+        projectName: p.projectName,
+        projectDescription: p.projectDescription,
+        starter: p.projectStarter ?? '',
+        members: Array.isArray(p.projectMembers) ? p.projectMembers : [],
+        count: Array.isArray(p.projectMembers) ? p.projectMembers.length : 0,
+      }));
+      setProjects(transformedProjects);
+    } catch (error) {
+      console.error('Failed to fetch projects:', error);
+      setProjects([]);
+    }
   }
-
-  const filteredStudents = allStudents.filter(student =>
-    student.name.toLowerCase().includes(currentInput.toLowerCase()) ||
-    student.roles.some(role => role.toLowerCase().includes(currentInput.toLowerCase())) ||
-    student.email.toLowerCase().includes(currentInput.toLowerCase())
-  );
-
-  console.log('Filtered students:', filteredStudents);
 
 
   useEffect(() => {
-
-    async function fetchProjects() {
-      try {
-        const response = await fetch('/projects');
-        const { projects: data } = await response.json();
-        // Optional transformation: rename _id to firebaseKey to match legacy structure
-        const transformedProjects = data.map(p => ({
-          firebaseKey: p._id,
-          projectName: p.projectName,
-          projectDescription: p.projectDescription,
-          starter: p.projectStarter ?? '',
-          members: Array.isArray(p.projectMembers) ? p.projectMembers : [],
-          count: Array.isArray(p.projectMembers) ? p.projectMembers.length : 0,
-        }));
-        setProjects(transformedProjects);
-      } catch (error) {
-        console.error('Failed to fetch projects:', error);
-        setProjects([]);
-      }
-    }
-
-    async function fetchProfiles() {
-      try {
-        const response = await fetch('profile/profiles');
-        const { profiles: data } = await response.json();
-        // Optional transformation: rename _id to firebaseKey to match legacy structure
-        const transformedProfiles = data.map(p => ({
-          // firebaseKey: p._id,
-          // projectName: p.projectName,
-          // projectDescription: p.projectDescription,
-          // starter: p.projectStarter ?? '',
-          // members: Array.isArray(p.projectMembers) ? p.projectMembers : [],
-          // count: Array.isArray(p.projectMembers) ? p.projectMembers.length : 0,
-          //username: String,
-          firebaseKey: p._id,
-          name: p.name,
-          email: p.email,
-          phone: p.phone,
-          picture: p.picture,
-          role: Array.isArray(p.roles) ? p.roles : [],
-          description: p.intro
-        }));
-        setAllStudents(transformedProfiles);
-      } catch (error) {
-        console.error('Failed to fetch student profiles:', error);
-        setAllStudents([]);
-      }
-    }
-    fetchProjects();
     fetchProfiles();
+    fetchProjects();
   }, []);
 
-  // fetch version
-
-  // fetch('/profile/profiles')
-  //   .then(res => res.json())
-  //   .then(data => {
-  //     setAllStudents(data);
-  //   })
-  //   .catch(err => {
-  //     console.error("Failed to load profiles from MongoDB", err)
-  //   })
-
-  // }, []);
-
+  const filterStudents = (SearchInfo) => {
+    const filtered = allStudents.filter(student =>
+      student.name.toLowerCase().includes(SearchInfo.toLowerCase()) ||
+      (student.roles && student.roles.some(role => role.toLowerCase().includes(SearchInfo.toLowerCase()))) ||
+      student.email.toLowerCase().includes(SearchInfo.toLowerCase())
+    );
+    setSearchResults(filtered);
+  };
 
   return (
     <>
       <HeaderBar></HeaderBar>
       <main>
         <Routes>
-          <Route path="/" element={<StudentPool resourceData={filteredStudents} filterStudents={filterStudents} />} />
-          <Route path="student/:studentKey" element={<StudentDetail resourceData={filteredStudents} />} />
+          <Route path="/" element={<StudentPool resourceData={searchResults} filterStudents={filterStudents} />} />
+          <Route path="/profile" element={<UploadProfile fetchProfiles={fetchProfiles} />} />
+          <Route path="/student/:studentKey" element={<StudentDetail resourceData={allStudents} />} />
           <Route path="/projects" element={<ProjectsPanel resourceData={projects} />} />
-          <Route path="projects/:projectKey" element={<ProjectDetail resourceData={projects} />} />
-          <Route path="/create-project" element={<CreateProject />} />
-          <Route path="/profile" element={<UploadProfile />} />
-          {<Route path="/myProjects" element={<MyProjects resourceData={PRO_DATA} />} />}
-          {/* <Route path="*" element={<Navigate to="/" />} /> */}
+          <Route path="/projects/:projectKey" element={<ProjectDetail resourceData={projects} />} />
+          <Route path="/create-project" element={<CreateProject fetchProjects={fetchProjects} />} />
+          <Route path="/myProjects" element={<MyProjects resourceData={PRO_DATA} />} />
         </Routes>
+        {/* <Route path="*" element={<Navigate to="/" />} /> */}
       </main>
     </>
   );

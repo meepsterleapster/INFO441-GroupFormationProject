@@ -44,4 +44,12 @@ router.post('/posts', async function (req, res, next) {
   }
 });
 
+router.get('/status', (req, res) => {
+  if (req.session?.account?.username) {
+    res.json({ loggedIn: true, username: req.session.account.username});
+  } else {
+    res.json({ loggedIn: false });
+  }
+});
+
 export default router;

@@ -8,11 +8,10 @@ export function CardsPanel(props){
 
         useEffect(() =>  {
             async function fetchUsername() {
-                        // const { refreshList = () => { } } = props;
                 try {
                     const res = await fetch('/profile/', {
                         method: 'GET',              
-                        credentials: 'include',     //
+                        credentials: 'include',
                     });
                     const { username } = await res.json()
                     setUsername(username)

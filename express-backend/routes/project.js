@@ -12,7 +12,7 @@ router.get('/', async function (req, res, next) {
   }
 });
 
-
+// posts a new project to project page
 router.post('/posts', async function (req, res, next) {
   console.log("testing post")
   console.log("incoming body:", req.body);

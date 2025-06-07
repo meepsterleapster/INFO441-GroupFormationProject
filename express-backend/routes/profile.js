@@ -27,6 +27,7 @@ router.get('/posterName', (req, res) => {
   }
 });
 
+// posts a user to the students page
 router.post('/posts', async function (req, res, next) {
   console.log("testing post")
   console.log("incoming body:", req.body);
@@ -50,6 +51,7 @@ router.post('/posts', async function (req, res, next) {
   }
 });
 
+// checks whether a user is logged in or out
 router.get('/status', (req, res) => {
   if (req.session?.account?.username) {
     res.json({ loggedIn: true, username: req.session.account.username});

@@ -44,9 +44,9 @@ export function HeaderBar({ }) {
                 <li className="projects">
                   <Link to="/myProjects">Projects</Link>
                 </li>
-                <li className="group">
+                {/* <li className="group">
                   <Link to="/group">Group</Link>
-                </li>
+                </li> */}
                 {isLoggedIn ? (
                   <li className="logout">
                     <a href="/signout">Log Out</a>

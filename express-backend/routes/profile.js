@@ -1,17 +1,6 @@
 import express from 'express';
 var router = express.Router();
 
-  /* GET users listing. */
-  // router.get('/', function (req, res, next) {
-  //   if (req.session && req.session.account) {
-  //     console.log("Username:", req.session.account.username);
-  //     res.send(`Hello, ${req.session.account.username}`);
-  //   } else {
-  //     console.log("No user session found.");
-  //     res.status(401).send('Not signed in');
-  //   }
-  // });
-
   router.get('/', (req, res) => {
   if (req.session?.account?.username) {
     res.json({ username: req.session.account.username }); 
